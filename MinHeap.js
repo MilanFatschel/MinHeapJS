@@ -34,7 +34,6 @@ class MinHeap {
         }
         
         if(this.heap[index].val > this.heap[smallerChildIndex].val) {
-          // No need to continue, we are in order
           this.swap(index, smallerChildIndex);
           index = smallerChildIndex;
         } else {
