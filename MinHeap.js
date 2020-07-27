@@ -4,6 +4,10 @@ class MinHeap {
     this.heap = [];
     }
   
+    // Example of Parent and Child Array
+    // P LC RC
+    // [1,2,3] =      1
+    //               2 3
     getLeftChildIndex(parentIndex) { return 2 * parentIndex + 1; }
     getRightChildIndex(parentIndex) { return 2 * parentIndex + 2; }
     getParentIndex(childIndex) { return Math.floor((childIndex - 1) / 2); }
@@ -17,6 +21,8 @@ class MinHeap {
     parent(index) { return this.heap[this.getParentIndex(index)]; }
 
     heapifyUp() {
+      // If the parent is greater than the current swap. Continue until heap
+      // is in order.
       var index = this.heap.length - 1;
       while(this.hasParent(index) && this.parent(index).val > this.heap[index].val) {
         this.swap(this.getParentIndex(index), index);
@@ -26,6 +32,8 @@ class MinHeap {
     }
     
     heapifyDown() {
+      // Get the smaller of the two childs. If the parent is greater than the smallest
+      // child, swap them. Keep doing this until the heap is in order.
       var index  = 0;
       while(this.hasLeftChild(index)) {
         var smallerChildIndex = this.getLeftChildIndex(index);
@@ -62,6 +70,8 @@ class MinHeap {
     }
     
     remove() {
+      // Get the top element. Copy the last element and place it at the top.
+      // Bubble it down until the heap is in order. 
       if(this.heap.length === 0) throw Error("Error: Heap underflow");
       var item = this.heap[0];
       this.heap[0] = this.heap[this.heap.length - 1];
@@ -71,6 +81,8 @@ class MinHeap {
     }
     
     add(item) {
+      // Add the new element to the last spot in the heap. 
+      // Bubble up until the heap is in order.
       this.heap.push(item);
       this.heapifyUp();
     }
